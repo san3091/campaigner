@@ -6,10 +6,14 @@ def require_all(_dir)
 end
 
 require 'active_record'
+require 'thor'
 require_relative '../models/application_record.rb'
 
 require_all '../models'
 require_all '../services'
+
+db_config = YAML::load(File.open("config/database.yml"))
+ActiveRecord::Base.establish_connection(db_config)
 
 Campaigner.start ARGV
 

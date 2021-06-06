@@ -1,4 +1,11 @@
 class Campaigner < Thor
+  include Thor::Actions
+
+  # Thor uses this method for file related methods
+  def self.source_root
+    File.dirname(__FILE__)
+  end
+
   desc "start_session", "Creates an empty session_notes.md file and opens it in your text editor"
   def start_seesion args
     # what campaign? (list campaigns)
@@ -10,11 +17,17 @@ class Campaigner < Thor
 
   desc "create_campaign", "Create a campaign"
   def create_campaign
-    # whats your campaign name?
-    # description?
-    #
-    # create in db
-    # done!
+    name = ask "What is the name of your campaign?"
+    description = ask "Describe #{name} in one or two sentences"
+
+    campaign = Campaign.create! name: name, description: description
+
+    say "Successfully created campaign!\nName: #{campaign.name}\nDescription: #{campaign.description}"
+
+  rescue => e
+    say "Something went wrong!"
+    say e.message
+    exit 1
   end
 
   desc "end_session", "Persists the session notes and creates a summary.md file"

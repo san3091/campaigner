@@ -3,7 +3,7 @@ class Session < ActiveRecord::Migration[6.0]
     create_table :sessions do |t|
       t.integer :number, null: false
       t.string :title, default: 'Untitled'
-      t.belongs_to :campaigns, foreign_key: true
+      t.belongs_to :campaign, foreign_key: true
 
       t.timestamps
     end

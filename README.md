@@ -16,3 +16,10 @@ $ bin/run end_session
 
 Each step creates a file for one of the three types of notes `plan`, `session_notes`, and `summary`. The files created contain yaml style front matter which allows the next step to create the correct associations.
 
+TODO
+
+- read from file into db
+- implement the rest of the methods...
+
+Do I want to have characters? if so why? Just names and notes, not stats, DnD Beyond already does that much better. But why? 
+

@@ -73,12 +73,29 @@ class Campaigner < Thor
 
   desc "end_session_plan", "Persist session_plan.md and deletes the file"
   def end_session_plan
+    file_path = _session_file_path "session_plan.md"
+    unless File.exists? file_path
+      say "File session_plan.md isn't where it should be!"
+      exit 1
+    end
+
+    note = Note.update_from_markdown file_path
+
+    say "Plan for session #{note.session.number} of #{note.session.campaign.name} updated successfully!", :green
+    say "Removing plan draft file"
+
+    remove_file file_path
+
+    say "All is well", :green
+  rescue => e
+    _handle_error e
   end
 
   no_commands do
     def _handle_error e
       say "Something went wrong!"
       say e.message, :red
+      say e.backtrace.first(10).join("\n"), :yellow
       exit 1
     end
 

@@ -21,5 +21,3 @@ TODO
 - read from file into db
 - implement the rest of the methods...
 
-Do I want to have characters? if so why? Just names and notes, not stats, DnD Beyond already does that much better. But why? 
-
